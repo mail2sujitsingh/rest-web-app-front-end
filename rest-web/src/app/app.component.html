@@ -1,0 +1,50 @@
+<div id="searchHotels">
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Hotel City</mat-label>
+      <input matInput placeholder="Ex. Athens">
+    </mat-form-field>
+  
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Check In Date</mat-label>
+      <input matInput placeholder="Ex. 2022-01-18">
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" (click)="searchHotels()">Search Hotels</button>
+  
+</div>
+
+<div>
+  <table *ngIf="isShown" mat-table [dataSource]="dataSource" class="mat-elevation-z8" >
+
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let element">{{element.name}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="code">
+      <th mat-header-cell *matHeaderCellDef> Code </th>
+      <td mat-cell *matCellDef="let element"> <a href="javascript:void(0)" (click)="fetchHotelDetails()">{{element.code}}</a></td>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="city">
+      <th mat-header-cell *matHeaderCellDef> City </th>
+      <td mat-cell *matCellDef="let element"> {{element.location.name}} </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="currency">
+      <th mat-header-cell *matHeaderCellDef> Currency </th>
+      <td mat-cell *matCellDef="let element"> {{element.currency}} </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="type">
+      <th mat-header-cell *matHeaderCellDef> Hotel Type </th>
+      <td mat-cell *matCellDef="let element"> {{element.type}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>
